@@ -4,8 +4,8 @@ import styles from './NavigationItems.css'
 
 const navigationItems = (props)=>(
     <ul className = {styles.NavigationItems}>
-       <NavigationItem link = "/" active = {true}>Burger Builder</NavigationItem>
-       <NavigationItem link = "/">Checkout</NavigationItem>
+       <NavigationItem link = "/"  exact >Burger Builder</NavigationItem>
+       <NavigationItem link = "/orders">Checkout</NavigationItem>
     </ul>
 )
 export default navigationItems
