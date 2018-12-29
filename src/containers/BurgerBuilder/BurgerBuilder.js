@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 
 //redux
 import {connect} from 'react-redux'
-import * as actionType from '../../store/actions'
+import * as burgerBuilderActions from '../../store/actions/index'
 
-import axios from '../../axios-orders'
+import axios from '../../axios-orders';
 import Auxi from '../../hoc/Auxi';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -31,11 +31,9 @@ class BurgerBuilder extends Component {
   //  }
     updatePurchaseState () {
         // ['meat', 'bacon' itd]
-        const sum = Object.keys( this.props.ings )
-            .map( igKey => {
+        const sum = Object.keys( this.props.ings ).map( igKey => {
                 return this.props.ings[igKey]; // ['0', '0', '0']
-            } )
-            .reduce( ( sum, el ) => { //sum jest to accumulator do argument do ktrego bedziemy sumowac , a el to elemnty do sumowania
+            } ).reduce( ( sum, el ) => { //sum jest to accumulator do argument do ktrego bedziemy sumowac , a el to elemnty do sumowania
                 return sum + el;
             },0  );
         return sum > 0
@@ -100,7 +98,8 @@ class BurgerBuilder extends Component {
         let burger = this.state.error===true ? <p>Ingredients cant be loaded</p>: <Spinner/>
         //If ingredinets is not null
         if(this.props.ings){
-          burger = (<Auxi>
+          burger = (
+          <Auxi>
             <Burger ingredients={this.props.ings} />
             <BuildControls
                 ingredientAdded={this.props.onIngredientAdded}
@@ -137,8 +136,8 @@ class BurgerBuilder extends Component {
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-        onIngredientAdded: (ingName)=> dispatch({type:actionType.ADD_INGREDIENT, ingredientName:ingName}), 
-        onIngredientRemoved: (ingName) => dispatch({type: actionType.REMOVE_INGREDIENT, ingredientName:ingName})
+        onIngredientAdded: (ingName)=> dispatch(burgerBuilderActions.addIngredient(ingName)), 
+        onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName))
     }
 }
 const mapStateToProps = (state)=>{
