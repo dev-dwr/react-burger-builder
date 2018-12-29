@@ -12,7 +12,8 @@ cd app
 npm install 
 npm start
 ```
-##Build With
+## Build With
+
  *React
  *React-Router
  *Redux
