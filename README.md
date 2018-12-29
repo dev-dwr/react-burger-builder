@@ -14,11 +14,11 @@ npm start
 ```
 ## Build With
 
- *React
- *React-Router
- *Redux
- *CSS-Modules
- *Axios
+ ⋅⋅*React
+ ⋅⋅*React-Router
+ ⋅⋅*Redux
+ ⋅⋅*CSS-Modules
+ ⋅⋅*Axios
 
 
 ## Contributing
