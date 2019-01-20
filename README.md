@@ -18,6 +18,7 @@ npm start
  * React-Router
  * Redux
  * CSS-Modules
+ * Firebase
  * Axios
 
 

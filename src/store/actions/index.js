@@ -1,5 +1,11 @@
 export {
-    addIngredient,removeIngredient
+    addIngredient,removeIngredient,initiallyIngredients
 } from './burgerBuilder'
 
-export {} from './order'
+export {purchaseBurger,purchaseInit,fetchOrders,
+    //deleteOrders 
+} from './order'
+
+export {
+    auth
+}from './auth'
