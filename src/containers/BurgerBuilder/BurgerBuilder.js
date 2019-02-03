@@ -15,7 +15,7 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler'
 
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         orderClicked: false,
         
@@ -37,14 +37,16 @@ class BurgerBuilder extends Component {
    
     
     orderButtonClicked = ()=>{
-        this.setState({
-            orderClicked: true
-        }) 
+        if(this.props.isAuth){
+            this.setState({orderClicked: true}) 
+         }else{
+             this.props.onAuthRedirect('/checkout')
+             this.props.history.push('/auth')
+         }
     }
     modalCancelHandler = () =>{
-        this.setState({
-            orderClicked: false
-        })
+      this.setState({orderClicked:false})
+        
     }
 
     modalCountinueHandler = () =>{
@@ -91,7 +93,7 @@ class BurgerBuilder extends Component {
 
         //Posting ingredients from datebase
         let orderSummary = null
-        let burger = this.props.error===true ? <p>Ingredients cant be loaded</p>: <Spinner/>
+        let burger = this.props.error ? <p>Ingredients cant be loaded</p>: <Spinner/>
         //If ingredinets is not null
         if(this.props.ings){
           burger = (
@@ -103,6 +105,7 @@ class BurgerBuilder extends Component {
                 disabled={disabledInfo}
                 purchasable={this.updatePurchaseState(this.props.ings)}
                 clicked ={this.orderButtonClicked}
+                isAuthenticated = {this.props.isAuth}
                 price={this.props.price} />
             </Auxi>
             )
@@ -129,7 +132,8 @@ const mapDispatchToProps = (dispatch)=>{
         onIngredientAdded: (ingName)=> dispatch(actions.addIngredient(ingName)), 
         onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
         onInitIngredients: () =>dispatch(actions.initiallyIngredients()),
-        onInitPurchase: ()=>dispatch(actions.purchaseInit())
+        onInitPurchase: ()=>dispatch(actions.purchaseInit()),
+        onAuthRedirect: (path)=>dispatch(actions.setAuthRedirect(path))
     }
 }
 const mapStateToProps = (state)=>{
@@ -137,6 +141,8 @@ const mapStateToProps = (state)=>{
         ings: state.burger.ingredients,
         price:state.burger.totalPrice,
         error: state.burger.error,
+        //Checking if it's authenticated
+        isAuth: state.auth.token !== null
 
     }
 }

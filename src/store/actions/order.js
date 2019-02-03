@@ -22,10 +22,10 @@ export const purchaseBurgerStart = () =>{
     }
 }
 //Dispatch when we click order button
-export const purchaseBurger = (orderData) =>{
+export const purchaseBurger = (orderData,token) =>{
     return dispatch =>{
         dispatch(purchaseBurgerStart())
-        axios.post('/orders.json', orderData).then(response =>{
+        axios.post('/orders.json?auth=' + token, orderData).then(response =>{
             console.log(response.data)
             dispatch(purchaseBurgerSuccess(response.data.name, orderData))
         }).catch(error =>{
@@ -58,10 +58,14 @@ export const fetchOrdersInit = () =>{
 
     }
 }
-export const fetchOrders = () =>{
+export const fetchOrders = (token,userId) =>{
     return dispatch =>{
         dispatch(fetchOrdersInit())
-        axios.get('/orders.json').then(response =>{
+        //Displaying orders to authenctiated user (this own orders)    
+        //adding token ?auth= + 
+        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        axios.get('/orders.json' + queryParams
+        ).then(response =>{
             
             const fetchedOrders=[]
             //key to indyfikator z bazy danych,czyli customer , deliverMethod itd  //turning object into an array
