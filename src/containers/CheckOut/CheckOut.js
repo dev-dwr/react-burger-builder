@@ -6,11 +6,6 @@ import ContactData from './ContacData/ContactData'
 //import * as actions from '../../store/actions//index'
 import {connect} from 'react-redux'
 class Checkout extends Component{
-
-
-    
-
-
     checkoutCancelledHandler = ()=>{
         //This will back to previous page
         this.props.history.goBack()
@@ -19,7 +14,6 @@ class Checkout extends Component{
         // replace changing path 
         this.props.history.replace('/checkout/contact-data')
     }
-    
     
     render(){
         let summary = <Redirect to="/"/>
