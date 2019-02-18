@@ -1,5 +1,7 @@
 # Burger Builder Project 
 Burger Builder Project is an application which creating a buger.
+I learned React by creating this application.
+It's comes from Maximilian Schwarzmüller's course on Udemy.
 
 
 
