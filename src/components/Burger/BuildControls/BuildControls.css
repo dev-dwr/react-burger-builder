@@ -1,14 +1,15 @@
 .BuildControls {
-    float: right;
-    margin: 25px;
-    position: fixed;
-    width: 30%;
+    width: 100%;
     background-color: #CF8F2E;
     display: flex;
     flex-flow: column;
     align-items: center;
-    border-radius: 25px;
+    box-shadow: 0 2px 1px #ccc;
+    margin:auto;
     padding: 8px 0;
+    position: fixed;
+    bottom: .1px;
+    border-bottom: none;
 }
 
 .OrderButton {
